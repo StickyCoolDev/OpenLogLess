@@ -1,0 +1,14 @@
+[project]
+name = "open-log-less"
+version = "0.1.0"
+description = "A open source log api"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "black>=25.11.0",
+    "fastapi[standard]==0.99.0",
+    "pydantic<2",
+    "python-dotenv>=1.2.1",
+    "sqlalchemy>=2.0.44",
+    "uvicorn>=0.38.0",
+]
