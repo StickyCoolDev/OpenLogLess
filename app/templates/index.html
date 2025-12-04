@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="keywords"
+              content="saas,telemetry,tools,development,open-source,open source">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description"
+              content="OpenLogLess is the complete and open-source SaaS solution for building and scaling your applications faster. Utilize our comprehensive telemetry tools, including advanced logging, monitoring, and tracing features." />
+        <meta property="og:image" content="/static/OpenLogLess.png" />
+        <meta property="og:escription"
+              content="OpenLogLess is the complete and open-source SaaS solution for building and scaling your applications faster. Utilize our comprehensive telemetry tools, including advanced logging, monitoring, and tracing features." />
+        <meta property="og:title" content="OpenLogLess - easy and cheap telemetry" />
+        <meta property="og:type" content="product" />
+        <meta name="googlebot" content="notranslate">
+        <title>OpenLogLess</title>
+        <style>
+            [x-cloak]{display:none}
+            @keyframes grid {
+                0% { transform: translateY(-50%); }
+                100% { transform: translateY(1%); }
+            }
+            .animate-grid {
+                animation: grid 15s linear infinite;
+            }
+            .synthwave-grid {
+                background-repeat: repeat;
+                background-size: 60px 60px;
+                height: 300vh;
+                inset: 0% 0px;
+                margin-left: -50%;
+                transform-origin: 100% 0 0;
+                width: 600vw;
+            }
+            :not(.dark) .synthwave-grid-light {
+                background-image:
+                    linear-gradient(to right,  rgba(0, 255, 0, 1) 1px, transparent 0),
+                    linear-gradient(to bottom, rgba(240, 201, 9, 1) 1px, transparent 0);
+            }
+            .dark .synthwave-grid-dark {
+                background-image:
+                    linear-gradient(to right, rgba(255,255,255,0.7) 1px, transparent 0),
+                    linear-gradient(to bottom, rgba(255,255,255,0.7) 1px, transparent 0);
+            }
+            /* Start of CSS from Second file */
+            @keyframes grid {
+                0% { transform: translateY(-50%); }
+                100% { transform: translateY(0); }
+            }
+            .animate-grid {
+                animation: grid 15s linear infinite;
+            }
+            .synthwave-grid {
+                background-repeat: repeat;
+                background-size: 60px 60px;
+                height: 300vh;
+                inset: 0% 0px;
+                margin-left: -50%;
+                transform-origin: 100% 0 0;
+                width: 600vw;
+            }
+            :not(.dark) .synthwave-grid-light-new { /* Renamed to avoid conflict */
+                background-image:
+                    linear-gradient(to right, rgba(0,0,0,0.6) 1px, transparent 0),
+                    linear-gradient(to bottom, rgba(0,0,0,0.6) 1px, transparent 0);
+            }
+            .dark .synthwave-grid-dark-new { /* Renamed to avoid conflict */
+                background-image:
+                    linear-gradient(to right, rgba(255,255,255,0.7) 1px, transparent 0),
+                    linear-gradient(to bottom, rgba(255,255,255,0.7) 1px, transparent 0);
+            }
+            /* End of CSS from Second file */
+        </style>
+        <link rel="dns-prefetch" href="https://unpkg.com">
+        <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+        <script src="https://unpkg.com/alpinejs" defer></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <nav x-data="{ navigationMenuOpen: false, navigationMenu: '', navigationMenuCloseDelay: 200, navigationMenuCloseTimeout: null, navigationMenuLeave() { let that = this; this.navigationMenuCloseTimeout = setTimeout(() => { that.navigationMenuClose(); }, this.navigationMenuCloseDelay); }, navigationMenuReposition(navElement) { this.navigationMenuClearCloseTimeout(); this.$refs.navigationDropdown.style.left = navElement.offsetLeft + 'px'; this.$refs.navigationDropdown.style.marginLeft = (navElement.offsetWidth/2) + 'px'; }, navigationMenuClearCloseTimeout(){ clearTimeout(this.navigationMenuCloseTimeout); }, navigationMenuClose(){ this.navigationMenuOpen = false; this.navigationMenu = ''; } }"
+             class="relative z-10 w-auto">
+            <div class="relative">
+                <ul class="flex flex-1 justify-end items-right p-1 space-x-1 list-none rounded-md border text-neutral-700 group border-neutral-200/80">
+                    <li>
+                        <button :class="{ 'bg-neutral-100' : navigationMenu=='getting-started', 'hover:bg-neutral-100' : navigationMenu!='getting-started' }"
+                                @mouseover="navigationMenuOpen=true; navigationMenuReposition($el); navigationMenu='getting-started'"
+                                @mouseleave="navigationMenuLeave()"
+                                class="inline-flex justify-center items-center px-4 py-2 w-max h-10 text-sm font-medium rounded-md transition-colors hover:text-neutral-900 focus:outline-none disabled:opacity-50 disabled:pointer-events-none group">
+                            <span>Getting started</span>
+                            <svg :class="{ '-rotate-180' : navigationMenuOpen==true && navigationMenu == 'getting-started' }"
+                                 class="relative top-[1px] ml-1 h-3 w-3 ease-out duration-300"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                    </li>
+                    <li>
+                        <button :class="{ 'bg-neutral-100' : navigationMenu=='learn-more', 'hover:bg-neutral-100' : navigationMenu!='learn-more' }"
+                                @mouseover="navigationMenuOpen=true; navigationMenuReposition($el); navigationMenu='learn-more'"
+                                @mouseleave="navigationMenuLeave()"
+                                class="inline-flex justify-center items-center px-4 py-2 w-max h-10 text-sm font-medium rounded-md transition-colors hover:text-neutral-900 focus:outline-none disabled:opacity-50 disabled:pointer-events-none bg-background hover:bg-neutral-100 group">
+                            <span>Learn More</span>
+                            <svg :class="{ '-rotate-180' : navigationMenuOpen==true && navigationMenu == 'learn-more' }"
+                                 class="relative top-[1px] ml-1 h-3 w-3 ease-out duration-300"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                    </li>
+                    <li>
+                        <a href="/docs"
+                           class="inline-flex justify-center items-center px-4 py-2 w-max h-10 text-sm font-medium rounded-md transition-colors hover:text-neutral-900 focus:outline-none disabled:opacity-50 disabled:pointer-events-none bg-background hover:bg-neutral-100 group">
+                            Documentation
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div x-ref="navigationDropdown"
+                 x-show="navigationMenuOpen"
+                 x-transition:enter="transition ease-out duration-100"
+                 x-transition:enter-start="opacity-0 scale-90"
+                 x-transition:enter-end="opacity-100 scale-100"
+                 x-transition:leave="transition ease-in duration-100"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-90"
+                 @mouseover="navigationMenuClearCloseTimeout()"
+                 @mouseleave="navigationMenuLeave()"
+                 class="absolute top-0 pt-3 duration-200 ease-out -translate-x-1/2 translate-y-11"
+                 x-cloak>
+                <div class="flex overflow-hidden justify-center w-auto h-auto bg-white rounded-md border shadow-sm border-neutral-200/70">
+                    <div x-show="navigationMenu == 'getting-started'"
+                         class="flex gap-x-3 justify-center items-stretch p-6 w-full max-w-2xl">
+                        <div class="flex-shrink-0 pt-28 pb-7 w-48 bg-gradient-to-br to-black rounded from-neutral-800">
+                            <div class="relative px-7 space-y-1.5 text-white">
+                                <img src="/static/OpenLogLess.png"
+                                     alt="OpenLogLess Logo"
+                                     height="50px"
+                                     width="50px">
+                                <span class="block font-bold">OpenLogLess</span>
+                                <span class="block text-sm opacity-60">A Telementry overload service.</span>
+                            </div>
+                        </div>
+                        <div class="w-72">
+                            <a href="#_"
+                               @click="navigationMenuClose()"
+                               class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                                <span class="block mb-1 font-medium text-black">Introduction</span>
+                                <span class="block font-light leading-5 opacity-50">Easy, simple, cheap and vast telemetry tools.</span>
+                            </a>
+                            <a href="#_"
+                               @click="navigationMenuClose()"
+                               class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                                <span class="block mb-1 font-medium text-black">How to use</span>
+                                <span class="block leading-5 opacity-50">Couldn't be easier. install SQK and add to project</span>
+                            </a>
+                            <a href="#_"
+                               @click="navigationMenuClose()"
+                               class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                                <span class="block mb-1 font-medium text-black">Contributing</span>
+                                <span class="block leading-5 opacity-50">Feel free to contribute your expertise. All these tools are open-source under MIT.</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div x-show="navigationMenu == 'learn-more'"
+                         class="flex justify-center items-stretch p-6 w-full">
+                        <div class="w-72">
+                            <a href="#_"
+                               @click="navigationMenuClose()"
+                               class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                                <span class="block mb-1 font-medium text-black">Tailwind CSS</span>
+                                <span class="block font-light leading-5 opacity-50">A utility first CSS framework for building amazing websites.</span>
+                            </a>
+                            <a href="#_"
+                               @click="navigationMenuClose()"
+                               class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                                <span class="block mb-1 font-medium text-black">Products</span>
+                                <span class="block font-light leading-5 opacity-50">Check out all all of our product.</span>
+                            </a>
+                        </div>
+                        <div class="w-72">
+                            <a href="#_"
+                               @click="navigationMenuClose()"
+                               class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                                <span class="block mb-1 font-medium text-black">Forum</span>
+                                <span class="block font-light leading-5 opacity-50">Join the commnity to learn, ask questions or have fun.</span>
+                            </a>
+                            <a href="#_"
+                               @click="navigationMenuClose()"
+                               class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                                <span class="block mb-1 font-medium text-black">About Us</span>
+                                <span class="block font-light leading-5 opacity-50">Learn more about the team and our mission.</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div x-data="{ angle: 60 }"
+             class="relative min-h-[420px] flex flex-col items-center justify-center w-full h-full overflow-hidden border-0"
+             x-cloak>
+            <h1 class="absolute w-full h-auto text-5xl font-bold text-center">Easy and Simple, Telementry</h1>
+            <div class="absolute inset-0 w-full h-full overflow-hidden opacity-50 pointer-events-none"
+                 style="perspective: 200px">
+                <div class="absolute inset-0"
+                     :style="{ transform: `rotateX(${angle}deg)` }">
+                    <div class="animate-grid synthwave-grid synthwave-grid-light-new synthwave-grid-dark-new"></div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-white to-transparent to-90% dark:from-black"></div>
+            </div>
+        </div>
+    </body>
+</html>

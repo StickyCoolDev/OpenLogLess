@@ -1,5 +1,6 @@
 # OpenLogLess
 ## How to run
+
 1. Install all dependencies 
 ```
 uv sync

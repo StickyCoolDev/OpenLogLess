@@ -1,0 +1,4 @@
+@view-transition {
+  transition-duration: 300ms;
+  navigation: auto;
+}
