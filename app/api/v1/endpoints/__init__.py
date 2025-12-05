@@ -1,14 +1,14 @@
 import hashlib
 import secrets
 
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Response
 from pydantic import BaseModel
 from sqlalchemy.sql.functions import current_timestamp
-
+from sqlalchemy import or_
 from app.db.models import Log
 from app.db import SessionLocal
 from app.db.models.User import User
-from app.schema import LogLevel
+from app.schema import LogLevel, UserTier
 from app.config import limiter
 
 
@@ -69,26 +69,60 @@ def get_log(request: Request):
     return logs
 
 
+from fastapi import Form
 
-@router.get("signup")
+
+@router.post("/signup", tags=["auth"])
 @limiter.limit("20/minute")
-def signup(request : Request, response: Response):
-    user_name = request.query_params.get("user_name")
-    password = request.query_params.get("password")
-    if not password:
-        return {
-            "ok"      : False,
-            "message" : "missing passsword"
-        }
-    salt = secrets.token_bytes(16)
+def signup(
+    request: Request,
+    email: str = Form(...),
+    password: str = Form(...),
+):
+    db = SessionLocal()
+
+        # Check if email OR username already exists
+    existing = db.query(User).filter(
+        or_(
+            User.email == email,
+            User.user_name == email
+        )
+    ).first()
     
-    iterations = 390000 
+    if existing:
+        return {
+            "ok": False,
+            "message": "User already registered",
+            "code": "signup/exists",
+        }
+
+    salt = secrets.token_bytes(16)
+    iterations = 390000
 
     hashed_password = hashlib.pbkdf2_hmac(
-        'sha256', 
-        password.encode('utf-8'), 
-        salt, 
-        iterations
+        "sha256",
+        password.encode("utf-8"),
+        salt,
+        iterations,
     )
 
-    
+    user = User(
+        email=email,
+        user_name=email,
+        salt=salt.hex(),
+        hashed_password=hashed_password.hex(),
+        is_active=True,
+        created_at=current_timestamp(),
+        user_tier=UserTier.FREE_PLAN,
+    )
+
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+
+    return {
+        "ok": True,
+        "message": "user created",
+        "code": "signup/success",
+        "user_id": user.id,
+    }

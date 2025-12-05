@@ -1,4 +1,12 @@
-from sqlalchemy import Boolean, CheckConstraint, Column, Enum, ForeignKey, String, Integer
+from sqlalchemy import (
+    Boolean,
+    CheckConstraint,
+    Column,
+    Enum,
+    ForeignKey,
+    String,
+    Integer,
+)
 import secrets
 
 from app.db import Base
@@ -13,7 +21,7 @@ class Token(Base):
     __tablename__ = "tokens"
 
     id = Column(Integer, index=True, nullable=False, primary_key=True)
-    user_id = Column(Integer, ForeignKey('users.id'),index=True, nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), index=True, nullable=False)
 
     token = Column(
         String(32),
